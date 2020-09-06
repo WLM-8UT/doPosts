@@ -134,14 +134,14 @@ public class PostServlet extends AbstractServlet {
      *@Date 2020/8/27
      *@Time 18:48
      */
-//    public CommonResult selectPostList(HttpServletRequest request , HttpServletResponse response){
-//
-//        Integer secondid = Integer.parseInt(request.getParameter("secondId"));
-//        postThreeLevleid = secondid;
-//        System.out.println(postThreeLevleid);
-//        List<Post> list = postService.selectThreeLevelClassPostList(secondid);
-//        return new CommonResult().success(list);
-//    }
+    public CommonResult selectPostList(HttpServletRequest request , HttpServletResponse response){
+
+        Integer secondid = Integer.parseInt(request.getParameter("secondId"));
+        postThreeLevleid = secondid;
+        System.out.println(postThreeLevleid);
+        List<Post> list = postService.selectThreeLevelClassPostList(secondid);
+        return new CommonResult().success(list);
+    }
 
     /**
      *@Description 添加帖子
@@ -152,6 +152,7 @@ public class PostServlet extends AbstractServlet {
      */
     public CommonResult addpost(HttpServletRequest request , HttpServletResponse response){
         Post post = new Post();
+        Integer secondid = Integer.parseInt(request.getParameter("secondId"));
         String postname = request.getParameter("titeid");
         String postContent = request.getParameter("postContent");
         Object object = request.getSession().getAttribute("user");
@@ -159,7 +160,7 @@ public class PostServlet extends AbstractServlet {
             return new CommonResult().unauthorized("未登录");
         }
         User user = (User)object;
-        List<PostClass> list = postClassService.getPostClassByIdWithParents(postThreeLevleid);
+        List<PostClass> list = postClassService.getPostClassByIdWithParents(secondid);
 //        for(int i =0 ;i < list.size();i++ ){
 //            System.out.println(list.get(i).getClassId());
 //        }
